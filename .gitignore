@@ -1,0 +1,5 @@
+/node_modules
+npm-debum.log
+.DS_Store
+/*.env
+/dist
