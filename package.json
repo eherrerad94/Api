@@ -5,11 +5,12 @@
   "main": "src/server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node dist/server.js",
-    "build": "babel src -d dist --presets es2015,stage-2 && npm run serve",
+    "start": "npm run build && node dist/server.js",
+    "build": "npm run destroy && babel src -d dist --presets es2015,stage-2 && npm run serve",
     "local": "nodemon src/server.js --exec babel-node --presets es2015,stage-2",
     "serve": "node dist/server.js",
-    "database": "mongod"
+    "database": "mongod",
+    "destroy": "rm -r dist"
   },
   "repository": {
     "type": "git",
