@@ -1,5 +1,4 @@
 import express from 'express';
-
 //Import all the specified routes
 import tvShow from './tvShow.js';
 
