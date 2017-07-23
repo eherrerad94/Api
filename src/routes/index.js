@@ -13,6 +13,6 @@ router.use(PATH_API,tvShow);
 router.get(PATH_API, (req,res) => {
     res.send('Welcome to the amazing API ')
 })
-// Same for all other files
-
+// Same for all other files/
+//https://ciphertrick.com/2017/01/11/token-based-authentication-node-js-using-jwt/
 module.exports = router;

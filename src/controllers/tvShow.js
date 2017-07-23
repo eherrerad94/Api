@@ -17,6 +17,27 @@ const listtvShows = ((req, res) => {
         })
 });
 
+const listTvShows = () => {
+    return tvShow.find()
+        .then(tvShows => {
+            console.log("Son: ", tvShows.length);
+            if (tvShows.length != 0) {
+                const tvShows = tvShows.rows.map(tvShow => {
+                    const { doc } = tvShow;
+                    return `TV Show ${doc._id}: ${doc.name}, color ${doc.color}`;
+                });
+                return tvShows;
+            }
+           // tvShows = {data: "no tvshows were found"};
+            console.log(tvShows);
+            return tvShows;
+
+        })
+        .catch(err => {
+            console.log("listTvShow error ", err);
+            return 'Something went wrong';
+        })
+}
 // tvShow.find({}, function(err,tvShow){
 //     if(err)
 //         res.send(err)
@@ -25,7 +46,7 @@ const listtvShows = ((req, res) => {
 
 const addtvShow = (req, res) => {
     var newtvShow = new tvShow(req.body);
-    newtvShow
+    return newtvShow
         .save()
         .then(tvShow => {
             console.log("Adding a tvShow")
@@ -39,7 +60,7 @@ const addtvShow = (req, res) => {
 
 const gettvShow = (req, res) => {
     const id = req.params.tvShowId;
-    tvShow
+    return tvShow
         .findById(id)
         .then(tvShow => {
             console.log('GET one tvShow: ', tvShow);
@@ -52,7 +73,7 @@ const gettvShow = (req, res) => {
 };
 
 const updatetvShow = (req, res) => {
-    tvShow
+   return tvShow
         .findOneAndUpdate({ _id: req.params.taskId }, req.body, { new: true })
         .then(tvShow => {
             console.log("updating a tvShow: ", tvShow)
@@ -65,19 +86,19 @@ const updatetvShow = (req, res) => {
 };
 
 const deletetvShow = (req, res) => {
-    tvShow
+    return tvShow
         .remove({ _id: req.params.taskId })
         .then(tvShow => {
             res.json({ message: 'tvShow sucessfully deleted' });
         })
         .catch(err => {
             res.send(err);
-            console.log('error deleting a tvShow ',err)
+            console.log('error deleting a tvShow ', err)
         })
 };
 
 module.exports = {
-    listtvShows,
+    listTvShows,
     addtvShow,
     gettvShow,
     updatetvShow,
