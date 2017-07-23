@@ -34,6 +34,6 @@ app.listen(PORT,(err) =>{
     if(!err)
         console.log("App running on port "+PORT);
     else
-        console.log("Error ");
+        console.log("Error running an app ", err);
 })
 
