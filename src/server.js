@@ -9,6 +9,7 @@ import routes from './routes'; // If you do not explicitly name the file you wan
 const app = express();
 const PORT = process.env.PORT || 3000;
 const URI = process.env.MONGOD_URI || uri;
+//mongodb://<dbuser>:<dbpassword>@ds117913.mlab.com:17913/heroku_4fb37fwz
 
 // Parse application/json
 app.use(bodyParser.json());
