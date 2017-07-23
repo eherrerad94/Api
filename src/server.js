@@ -18,14 +18,14 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
 
 //database connection
-mongoose.Promise = global.Promise;
-mongoose.connection.openUri(URI)
-    .then((message) =>{
-        console.log("Connected to database successfully");
-    }).catch((err) =>{
-        console.log("An error ocurred: ",err);
-        process.exit(1);
-});
+// mongoose.Promise = global.Promise;
+// mongoose.connection.openUri(URI)
+//     .then((message) =>{
+//         console.log("Connected to database successfully");
+//     }).catch((err) =>{
+//         console.log("An error ocurred: ",err);
+//         process.exit(1);
+// });
 
 //middleware routes
 app.use('/', routes);
