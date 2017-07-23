@@ -2,13 +2,13 @@
   "name": "api-node-express-mongodb",
   "version": "1.0.0",
   "description": "an api with node, express and mongodb",
-  "main": "api/api.js",
+  "main": "src/server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node dist/api.js",
-    "build": "babel api -d dist --presets es2015,stage-2 && npm run serve",
-    "local": "nodemon api/api.js --exec babel-node --presets es2015,stage-2",
-    "serve": "node dist/api.js",
+    "start": "node dist/server.js",
+    "build": "babel src -d dist --presets es2015,stage-2 && npm run serve",
+    "local": "nodemon src/server.js --exec babel-node --presets es2015,stage-2",
+    "serve": "node dist/server.js",
     "database": "mongod"
   },
   "repository": {
