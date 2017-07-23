@@ -28,7 +28,7 @@ mongoose.connection.openUri(URI)
 });
 
 //middleware routes
-app.use('/', routes);
+//app.use('/', routes);
 // running app in a port
 app.listen(PORT,(err) =>{
     if(!err)
