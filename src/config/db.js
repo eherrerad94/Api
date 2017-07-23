@@ -1,6 +1,6 @@
 
 
-const db = "mongodb://localhost/myDB";
+const db = "mongodb://localhost/databaseMongo";
 //const PATH_API = '/api/v1';
 
 

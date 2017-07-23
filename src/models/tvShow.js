@@ -1,6 +1,7 @@
 import mongoose from 'mongoose';
+const Schema = mongoose.Schema;
 
-const tvShowSchema = new mongoose.Schema({
+const tvShowSchema = new Schema({
     title:   { type: String  },
 	year:    { type: Number  },
 	country: { type: String },
@@ -12,4 +13,4 @@ const tvShowSchema = new mongoose.Schema({
 
 
 
-module.exports = mongoose.model('tvShow',tvShowSchema);
+module.exports = mongoose.model('tvshow',tvShowSchema);
