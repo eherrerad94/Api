@@ -9,7 +9,7 @@ import routes from './routes'; // If you do not explicitly name the file you wan
 const app = express();
 const PORT = process.env.PORT || 3000;
 const URI = process.env.MONGOD_URI || uri; 
-//const databaseMongo = 'mongodb://eduardo:rafaga@ds117913.mlab.com:17913/heroku_4fb37fwz';
+const databaseMongo = 'mongodb://eduardo:rafaga@ds117913.mlab.com:17913/heroku_4fb37fwz';
 
 // Parse application/json
 app.use(bodyParser.json());
@@ -20,7 +20,7 @@ app.use(bodyParser.urlencoded({extended: true}));
 
 //database connection
 mongoose.Promise = global.Promise;
-mongoose.connection.openUri(URI)
+mongoose.connection.openUri(databaseMongo)
     .then(() =>{
         console.log("Connected to database successfully");
     }).catch((err) =>{
