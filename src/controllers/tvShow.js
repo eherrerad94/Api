@@ -1,64 +1,79 @@
-import mongoose  from 'mongoose';
+import mongoose from 'mongoose';
 import '../models/tvShow';
 const tvShow = mongoose.model('tvShow');
 
-const listtvShows = function(req,res){
+const listtvShows = ((req, res) => {
     console.log("GET tvShows")
-    tvShow.find(function(err,tvShows){
-                if (err) {
-                 res.send(500, err.message);
-                }
+    tvShow
+        .find()
+        .then(tvShows => {
+            res.send('Hello from api/v1/tvShow');
+            // res.status(200).jsonp(tvShows);
+            console.log(tvShows);
+        })
+        .catch(err => {
+            res.send(500, err.message);
+            console.log('Error:', err)
+        })
+});
 
-                console.log('GET /tvShows')
-       res.send('Hello from api/v1/tvShow');
-        // res.status(200).jsonp(tvShows);
-        console.log(tvShows);
-    });
+// tvShow.find({}, function(err,tvShow){
+//     if(err)
+//         res.send(err)
+//     res.json(tvShow);
+// });
 
-    // tvShow.find({}, function(err,tvShow){
-    //     if(err)
-    //         res.send(err)
-    //     res.json(tvShow);
-    // });
-
-
+const addtvShow = (req, res) => {
+    var newtvShow = new tvShow(req.body);
+    newtvShow
+        .save()
+        .then(tvShow => {
+            console.log("Adding a tvShow")
+            res.json(tvShow);
+        })
+        .catch(err => {
+            console.log("Error adding a tvShow: ", err)
+        })
 };
 
-const addtvShow = function(req,res){
-    var newtvShow =  new tvShow(req.body);
-    newtvShow.save(function(err,tvShow){
-        if(err)
-            res.send(err)
-        res.json(tvShow);
-    });
-};
 
-
-const gettvShow = function(req,res){
-    tvShow.findById(req.params.tvShowId, function(err,tvShow){
-        if(err)
+const gettvShow = (req, res) => {
+    const id = req.params.tvShowId;
+    tvShow
+        .findById(id)
+        .then(tvShow => {
+            console.log('GET one tvShow: ', tvShow);
+            res.json(tvShow);
+        })
+        .catch(err => {
+            console.log('Error getting a tvShow: ', err);
             res.send(err);
-        res.json(tvShow);
-    });
+        })
 };
 
-const updatetvShow = function(req,res){
-
-    tvShow.findOneAndUpdate({_id: req.params.taskId}, req.body, {new: true}, function(err,tvShow){
-        if(err)
+const updatetvShow = (req, res) => {
+    tvShow
+        .findOneAndUpdate({ _id: req.params.taskId }, req.body, { new: true })
+        .then(tvShow => {
+            console.log("updating a tvShow: ", tvShow)
+            res.json(tvShow);
+        })
+        .catch(err => {
+            console.log("error updating a tvShow: ", Error)
             res.send(err)
-        res.json(tvShow);
-    });
+        })
 };
 
-const deletetvShow = function(req,res){
-    tvShow.remove({
-        _id: req.params.taskId
-    }, function(err,tvShow){
-        if(err)
+const deletetvShow = (req, res) => {
+    tvShow
+        .remove({ _id: req.params.taskId })
+        .then(tvShow => {
+            res.json({ message: 'tvShow sucessfully deleted' });
+        })
+        .catch(err => {
             res.send(err);
-        res.json({message: 'tvShow sucessfully deleted'});
-    });
+            console.log('error deleting a tvShow ',err)
+        })
 };
 
 module.exports = {
