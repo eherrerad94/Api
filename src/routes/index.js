@@ -1,6 +1,8 @@
 import express from 'express';
 //Import all the specified routes
 import tvShow from './tvShow.js';
+import user from './user.js';
+import url from './url.js';
 
 const PATH_API = '/api/v1';
 const router = express.Router();
@@ -9,6 +11,8 @@ const router = express.Router();
 // and we're gonna use as: router.use('/path', NAME);
 
 router.use(PATH_API,tvShow);
+router.use(PATH_API,user);
+router.use(PATH_API,url);
 
 router.get(PATH_API, (req,res) => {
     res.send('Welcome to the amazing API ')
