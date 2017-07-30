@@ -3,7 +3,7 @@ import tvShow from '../models/tvShow';
 const listTvShows = () => {
     return tvShow.find({})
         .then(tvShows => {
-            console.log("tvshows ",tvShows)
+            console.log("tvshows ", tvShows)
             return tvShows
         })
         .catch(err => {
@@ -17,23 +17,23 @@ const addTvShow = (tvshow) => {
     return newTvShow
         .save()
         .then(tvShow => {
-            console.log('Adding a new tvShow');
+            console.log('Adding a new tvShow: ', tvShow);
             return tvShow;
         })
         .catch(err => {
             console.log("Error adding a new tvshow: ", err);
             return 'Something went wrong';
-        }); 
+        });
 };
 
 const getTvShow = (id) => {
     return tvShow.findById(id)
-        .then(tvShow =>{
+        .then(tvShow => {
             console.log('Get one tvShow: ', tvShow)
             return tvShow;
         })
-        .catch(err =>{
-            console.log('error getting a tvShow: ',err)
+        .catch(err => {
+            console.log('error getting a tvShow: ', err)
             return 'Something went wrong';
         })
 };
@@ -41,41 +41,52 @@ const getTvShow = (id) => {
 const updateTvShow = (id, body) => {
     return tvShow
         .findByIdAndUpdate(id, body)
-        .then( tvShow => {
-            console.log('Updating a tvShow')
-            return tvShow;
+        .then(tvShow => {
+            console.log('Updating a tvShow ', tvShow," and the new body: ", body)
+            var response = {
+                oldTvShow: tvShow,
+                newTvShow: body
+            }
+            return response;
         })
         .catch(err => {
-            console.log('Error updating a tvShow: ',err)
+            console.log('Error updating a tvShow: ', err)
             return "Something went wrong"
         })
-}; 
+};
 
 
 const deleteTvShow = (id) => {
     return tvShow
-        .remove({_id: id})
-        .then( tvShow =>{
-            console.log('Deleting a tvshow with id ', id)
+        .findById(id)
+        .then(tvShow => {
+            console.log('Get one tvShow: ', tvShow)
             return tvShow;
         })
         .catch(err => {
-            console.log('error deleting a tvshow ',err)
+            console.log('error deleting a tvshow ', err)
             return 'somethin went wrong'
         })
 }
 
+const remove = (req, res) => {
+
+    const id = req.params.id;
+    deleteTvShow(id)
+        .then(tvShow => {
+            res.status(200).send(tvShow);
+        })
+        .catch(err => {
+            res.status(200).send(err);
+        })
+}
 module.exports = {
     listTvShows,
     addTvShow,
     getTvShow,
     updateTvShow,
     deleteTvShow,
-    // listtvShows,
-    // addtvShow,
-    // gettvShow,
-    // updatetvShow,
-    // deletetvShow
+    remove
 };
 
 // const addtvShow = ((req, res) => {

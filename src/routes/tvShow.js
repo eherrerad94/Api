@@ -9,11 +9,13 @@ app.group('/tvShow', (router) => {
                 .listTvShows()
                 .then(tvShowList => {
                     console.log("tvShows:", tvShowList)
-                    res.status(200).json({
-                        tvShowList: tvShowList,
-                        length: tvShowList.length,
-                        status: 200
-                    })
+                    res
+                        .status(200)
+                        .json({
+                            tvShowList: tvShowList,
+                            length: tvShowList.length,
+                            message: 'Ok' 
+                        })
                 })
                 .catch(err => {
                     console.log("Err:", err)
@@ -25,7 +27,9 @@ app.group('/tvShow', (router) => {
             tvShowCtrl
                 .getTvShow(id)
                 .then(tvShow => {
-                    res.status(200).json({ tvShow: tvShow })
+                    res
+                        .status(200)
+                        .json({ tvShow: tvShow, message: 'success'})
                 })
                 .catch(err => {
                     console.log("Err ", err)
@@ -33,11 +37,14 @@ app.group('/tvShow', (router) => {
                 })
         })
         .post('/', (req, res) => {
-            const tvshow = req.body;
+
             tvShowCtrl
-                .addTvShow(tvshow)
+                .addTvShow(req.body)
                 .then(tvShow => {
-                    res.status(200).json({ tvShow: tvShow })
+                    res
+                        .status(201)
+                        .json({ tvShow: tvShow , message: 'tvshow created successfully'})
+                        console.log(tvShow);
                 })
                 .catch(err => {
                     console.log("Err ", err)
@@ -50,21 +57,27 @@ app.group('/tvShow', (router) => {
             const body = req.body;
             tvShowCtrl
                 .updateTvShow(id, body)
-                .then(tvShow => {
-                    console.log("updating a tvShow: ", tvShow)
-                    res.status(200).json({tvShow: tvShow});
+                .then(response => {
+                  //  console.log("updating a tvShow: ", tvShow)
+                    res.status(200).json({ 
+                        message: 'tvshow updated sucessfully',
+                        newtvShow:  response.newTvShow, 
+                        oldtvshow: response.oldTvShow 
+                    });
                 })
                 .catch(err => {
                     console.log("error updating a tvShow: ", Error)
                     res.status(200).send(err)
                 });
         })
-        .delete(':/id', (req, res) =>{
-            const id = req.params.id;
+        .delete('/:id', (req, res) => {
+            console.log(req.params.id);
             tvShowCtrl
-                .deleteTvShow(id)
-                .then(tvShow => {
-                    res.status(200).send(tvShow);
+                .deleteTvShow(req.params.id)
+                .then( tvshow => {
+                    console.log(tvshow);
+                    res.status(200).json({message: "TVShow deleted successfully", tvShowDeleted: tvshow});
+                    tvshow.remove();
                 })
                 .catch(err => {
                     res.status(200).send(err);
