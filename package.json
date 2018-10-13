@@ -28,11 +28,11 @@
   },
   "homepage": "https://github.com/eherrerad94/API#readme",
   "dependencies": {
-    "body-parser": "^1.17.2",
-    "express": "^4.15.3",
+    "body-parser": "^1.18.2",
+    "express": "^4.16.0",
     "express-group-routes": "^1.1.0",
-    "method-override": "^2.3.9",
-    "mongoose": "^4.11.3"
+    "method-override": "^2.3.10",
+    "mongoose": "^4.11.14"
   },
   "devDependencies": {
     "babel-cli": "^6.24.1",
