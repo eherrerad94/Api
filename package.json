@@ -29,7 +29,7 @@
   "homepage": "https://github.com/eherrerad94/API#readme",
   "dependencies": {
     "body-parser": "^1.17.2",
-    "express": "^4.15.3",
+    "express": "^4.17.3",
     "express-group-routes": "^1.1.0",
     "method-override": "^2.3.9",
     "mongoose": "^4.11.3"
